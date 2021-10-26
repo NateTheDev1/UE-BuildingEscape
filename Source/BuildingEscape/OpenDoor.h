@@ -2,8 +2,11 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
 #include "CoreMinimal.h"
+
+#include "Components/ActorComponent.h"
+#include "Engine/TriggerVolume.h"
+
 #include "OpenDoor.generated.h"
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
@@ -17,6 +20,7 @@ public:
 protected:
   // Called when the game starts
   virtual void BeginPlay() override;
+  void OpenDoor(float DeltaTime);
 
 public:
   // Called every frame
@@ -27,5 +31,13 @@ public:
 private:
   float InitialYaw;
   float CurrentYaw;
-  float TargetYaw;
+
+  UPROPERTY(EditAnywhere)
+  float TargetYaw = 90.f;
+
+  UPROPERTY(EditAnywhere)
+  ATriggerVolume *PressurePlate;
+
+  UPROPERTY(EditAnywhere)
+  AActor *OpeningActor;
 };
