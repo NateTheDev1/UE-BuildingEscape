@@ -10,34 +10,45 @@
 #include "OpenDoor.generated.h"
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class BUILDINGESCAPE_API UOpenDoor : public UActorComponent {
-  GENERATED_BODY()
+class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
+{
+	GENERATED_BODY()
 
 public:
-  // Sets default values for this component's properties
-  UOpenDoor();
+	// Sets default values for this component's properties
+	UOpenDoor();
 
 protected:
-  // Called when the game starts
-  virtual void BeginPlay() override;
-  void OpenDoor(float DeltaTime);
+	// Called when the game starts
+	virtual void BeginPlay() override;
+	void OpenDoor(float DeltaTime);
+	void CloseDoor(float DeltaTime);
 
 public:
-  // Called every frame
-  virtual void
-  TickComponent(float DeltaTime, ELevelTick TickType,
-                FActorComponentTickFunction *ThisTickFunction) override;
+	// Called every frame
+	virtual void
+	TickComponent(float DeltaTime, ELevelTick TickType,
+	              FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-  float InitialYaw;
-  float CurrentYaw;
+	float InitialYaw;
+	float CurrentYaw;
 
-  UPROPERTY(EditAnywhere)
-  float TargetYaw = 90.f;
+	UPROPERTY(EditAnywhere)
+	float TargetYaw = 90.f;
 
-  UPROPERTY(EditAnywhere)
-  ATriggerVolume *PressurePlate;
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume* PressurePlate;
 
-  UPROPERTY(EditAnywhere)
-  AActor *OpeningActor;
+	UPROPERTY(EditAnywhere)
+	AActor* OpeningActor;
+
+	UPROPERTY(EditAnywhere)
+	float CloseSpeed = 0.7f;
+
+	UPROPERTY(EditAnywhere)
+	float OpenSpeed = 2.f;
+
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume* ReenterVolume;
 };
