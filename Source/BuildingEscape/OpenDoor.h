@@ -23,18 +23,24 @@ protected:
 	virtual void BeginPlay() override;
 	void OpenDoor(float DeltaTime);
 	void CloseDoor(float DeltaTime);
+	float TotalMassOfActors() const;
+	void FindAudioComponent();
 
 public:
 	// Called every frame
 	virtual void
 	TickComponent(const float DeltaTime, const ELevelTick TickType,
 	              FActorComponentTickFunction* ThisTickFunction) override;
+	bool OpenDoorSound = false;
+	bool CloseDoorSound = true;
 
 private:
 	float InitialYaw;
 	float CurrentYaw;
 
 	float DoorLastOpened = 0.f;
+
+	UAudioComponent* AudioComponent = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 2.f;
@@ -56,4 +62,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* ReenterVolume;
+
+	UPROPERTY(EditAnywhere)
+	float MassToOpenDoor = 50.f;
 };
